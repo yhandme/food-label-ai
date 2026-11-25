@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="食安标签通——AI 食品标签解读与添加剂科普网站，帮助你看懂食品配料表，科学认识食品添加剂。">
+  <title>食安标签通 · AI 食品标签解读与添加剂科普</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ========== 顶部导航 ========== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-inner">
+      <a href="#home" class="brand" data-nav>
+        <span class="brand-icon">🥗</span>
+        <span class="brand-text">食安<span class="brand-highlight">标签通</span></span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#home" class="nav-link active" data-nav>首页</a>
+        <a href="#reader" class="nav-link" data-nav>标签解读</a>
+        <a href="#library" class="nav-link" data-nav>添加剂科普</a>
+        <a href="#assistant" class="nav-link" data-nav>AI 问答</a>
+        <a href="#tips" class="nav-link" data-nav>食品安全贴士</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="切换导航菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ========== 首页 Hero ========== -->
+    <section class="page active" id="home">
+      <div class="hero">
+        <div class="hero-bg-blob blob-1"></div>
+        <div class="hero-bg-blob blob-2"></div>
+        <div class="container hero-inner">
+          <div class="hero-content">
+            <div class="hero-badge">✨ AI 驱动的食品安全科普助手</div>
+            <h1 class="hero-title">看懂食品标签<br><span class="gradient-text">吃得明白安心</span></h1>
+            <p class="hero-desc">配料表看不懂？添加剂名字像天书？粘贴一段配料表，食安标签通帮你快速识别添加剂、评估风险、科普知识，让每一次购物都更有底气。</p>
+            <div class="hero-actions">
+              <a href="#reader" class="btn btn-primary" data-nav>🔍 立即解读标签</a>
+              <a href="#library" class="btn btn-outline" data-nav>📚 浏览添加剂库</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat-item"><strong id="statAdditives">22</strong><span>种添加剂知识</span></div>
+              <div class="stat-item"><strong>8</strong><span>类常见功能</span></div>
+              <div class="stat-item"><strong>100%</strong><span>本地安全运行</span></div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="phone-mock">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="mock-header">🥗 食安标签通</div>
+                <div class="mock-label">
+                  <div class="mock-label-title">配料表</div>
+                  <div class="mock-tags">
+                    <span class="mock-tag safe">水</span>
+                    <span class="mock-tag safe">小麦粉</span>
+                    <span class="mock-tag warn">山梨酸钾</span>
+                    <span class="mock-tag safe">黄原胶</span>
+                    <span class="mock-tag danger">亚硝酸钠</span>
+                    <span class="mock-tag safe">维生素C</span>
+                  </div>
+                </div>
+                <div class="mock-result">
+                  <div class="mock-score"><span>风险提示</span><strong>2 项需留意</strong></div>
+                  <div class="mock-bar"><i style="width:32%"></i></div>
+                </div>
+                <div class="mock-card">
+                  <div class="mock-card-icon">🛡️</div>
+                  <div><b>山梨酸钾</b><small>防腐剂 · 较安全</small></div>
+                </div>
+              </div>
+            </div>
+            <div class="floating-chip chip-1">✅ 智能识别</div>
+            <div class="floating-chip chip-2">📖 科普解读</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 核心功能 -->
+      <div class="container section">
+        <div class="section-heading">
+          <span class="section-eyebrow">CORE FEATURES</span>
+          <h2>三大核心功能，<span class="gradient-text">一站式科普</span></h2>
+          <p>从识别到理解，从查询到学习，覆盖你关心的食品安全问题</p>
+        </div>
+        <div class="feature-grid">
+          <a href="#reader" class="feature-card card-reader" data-nav>
+            <div class="feature-icon">🔍</div>
+            <h3>标签智能解读</h3>
+            <p>粘贴配料表文本，自动识别其中的食品添加剂，标注功能类别与安全提示，一键生成通俗解读报告。</p>
+            <span class="feature-link">开始解读 →</span>
+          </a>
+          <a href="#library" class="feature-card card-library" data-nav>
+            <div class="feature-icon">📚</div>
+            <h3>添加剂科普库</h3>
+            <p>按功能分类浏览 20+ 常见添加剂，了解每种的用途、常见食品、安全限量和科学解读。</p>
+            <span class="feature-link">进入科普库 →</span>
+          </a>
+          <a href="#assistant" class="feature-card card-assistant" data-nav>
+            <div class="feature-icon">💬</div>
+            <h3>AI 科普问答</h3>
+            <p>关于配料表、防腐剂、甜味剂的疑问，随时提问。基于科学知识库，给出清晰可靠的回答。</p>
+            <span class="feature-link">去提问 →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 使用流程 -->
+      <div class="container section">
+        <div class="section-heading">
+          <span class="section-eyebrow">HOW IT WORKS</span>
+          <h2>三步，<span class="gradient-text">读懂一张标签</span></h2>
+        </div>
+        <div class="steps-grid">
+          <div class="step-card"><div class="step-num">01</div><h3>输入配料表</h3><p>粘贴食品包装上的配料表文字，或直接选用示例数据体验。</p></div>
+          <div class="step-arrow">→</div>
+          <div class="step-card"><div class="step-num">02</div><h3>智能识别分析</h3><p>系统比对知识库，高亮添加剂并给出功能、风险等级与说明。</p></div>
+          <div class="step-arrow">→</div>
+          <div class="step-card"><div class="step-num">03</div><h3>查看科普建议</h3><p>获得通俗的解读报告和健康建议，把知识用到实际购物中。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 标签解读 ========== -->
+    <section class="page" id="reader">
+      <div class="container section">
+        <div class="section-heading left">
+          <span class="section-eyebrow">LABEL READER</span>
+          <h2>标签智能解读</h2>
+          <p>粘贴配料表，让 AI 帮你识别其中的添加剂与潜在风险</p>
+        </div>
+
+        <div class="reader-layout">
+          <div class="reader-input-panel">
+            <div class="panel-card">
+              <div class="panel-header">
+                <h3>📝 输入配料表</h3>
+                <span class="panel-hint">支持直接粘贴文字</span>
+              </div>
+              <textarea id="labelInput" placeholder="请粘贴食品包装上的配料表，例如：配料：水、白砂糖、山梨酸钾、柠檬黄……" spellcheck="false"></textarea>
+              <div class="sample-block">
+                <div class="sample-title">🧪 试试示例数据</div>
+                <div class="sample-list" id="sampleList"></div>
+              </div>
+              <div class="input-actions">
+                <button class="btn btn-primary btn-block" id="analyzeBtn">🔍 开始智能解读</button>
+                <button class="btn btn-ghost btn-block" id="clearBtn">清空内容</button>
+              </div>
+              <div class="privacy-note">🔒 所有分析在浏览器本地完成，你的输入不会被上传或保存。</div>
+            </div>
+          </div>
+
+          <div class="reader-result-panel" id="resultPanel">
+            <div class="empty-state" id="emptyState">
+              <div class="empty-icon">🔬</div>
+              <h3>等待解读</h3>
+              <p>在左侧输入配料表或选择示例数据，然后点击「开始智能解读」</p>
+            </div>
+            <div class="result-content hidden" id="resultContent">
+              <!-- 解读结果动态生成 -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 添加剂科普库 ========== -->
+    <section class="page" id="library">
+      <div class="container section">
+        <div class="section-heading left">
+          <span class="section-eyebrow">ADDITIVE LIBRARY</span>
+          <h2>食品添加剂科普库</h2>
+          <p>按功能分类查询，科学认识每一种添加剂</p>
+        </div>
+
+        <div class="library-toolbar">
+          <div class="search-box">
+            <span class="search-icon">🔎</span>
+            <input type="text" id="searchInput" placeholder="搜索添加剂名称、英文名或 INS 编号…">
+          </div>
+          <div class="filter-chips" id="filterChips"></div>
+        </div>
+
+        <div class="library-count" id="libraryCount"></div>
+        <div class="additive-grid" id="additiveGrid"></div>
+        <div class="no-result hidden" id="noResult">
+          <div class="empty-icon">🔍</div>
+          <h3>没有找到相关添加剂</h3>
+          <p>试试更换关键词或选择其他分类</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== AI 问答 ========== -->
+    <section class="page" id="assistant">
+      <div class="container section">
+        <div class="section-heading left">
+          <span class="section-eyebrow">AI ASSISTANT</span>
+          <h2>AI 食品安全问答</h2>
+          <p>关于食品标签和添加剂的疑问，随时提问</p>
+        </div>
+
+        <div class="chat-layout">
+          <div class="chat-card">
+            <div class="chat-header">
+              <div class="chat-avatar">🤖</div>
+              <div>
+                <h3>食安小助手</h3>
+                <span class="chat-status"><i></i> 在线 · 基于科普知识库</span>
+              </div>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+              <div class="chat-message bot">
+                <div class="message-avatar">🤖</div>
+                <div class="message-bubble">你好！我是食安小助手 👋 关于食品标签、添加剂、食品安全，你想了解什么？可以从下面的常见问题开始，也可以直接输入你的问题。</div>
+              </div>
+            </div>
+            <div class="quick-questions" id="quickQuestions"></div>
+            <div class="chat-input-area">
+              <input type="text" id="chatInput" placeholder="输入你的问题，例如：添加剂都有害吗？">
+              <button class="btn btn-primary" id="sendBtn">发送 ➤</button>
+            </div>
+          </div>
+          <div class="chat-side">
+            <div class="side-card">
+              <h3>💡 提问小贴士</h3>
+              <ul>
+                <li>可以直接问「苯甲酸钠是什么」</li>
+                <li>试试问「无糖饮料安全吗」</li>
+                <li>询问「亚硝酸盐为什么用在肉里」</li>
+                <li>支持关键词匹配，用自然语言提问即可</li>
+              </ul>
+            </div>
+            <div class="side-card disclaimer">
+              <h3>⚠️ 免责声明</h3>
+              <p>本助手回答基于公开科普知识整理，仅供学习参考，不构成医疗建议或消费指导。如有健康疑虑，请咨询专业医生或营养师。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 食品安全贴士 ========== -->
+    <section class="page" id="tips">
+      <div class="container section">
+        <div class="section-heading">
+          <span class="section-eyebrow">SAFETY TIPS</span>
+          <h2>食品安全<span class="gradient-text">小贴士</span></h2>
+          <p>把这些习惯带进超市，购物更有底气</p>
+        </div>
+        <div class="tips-grid" id="tipsGrid"></div>
+
+        <div class="cta-banner">
+          <div>
+            <h2>准备好读懂下一张食品标签了吗？</h2>
+            <p>现在就试试标签解读功能，把科普知识用起来</p>
+          </div>
+          <a href="#reader" class="btn btn-light" data-nav>🔍 开始解读</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== 添加剂详情弹窗 ========== -->
+  <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ========== 页脚 ========== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="brand"><span class="brand-icon">🥗</span><span class="brand-text">食安<span class="brand-highlight">标签通</span></span></div>
+        <p>AI 食品标签解读与添加剂科普网站<br>让食品科学变得简单易懂</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>快速导航</h4>
+          <a href="#reader" data-nav>标签解读</a>
+          <a href="#library" data-nav>添加剂科普</a>
+          <a href="#assistant" data-nav>AI 问答</a>
+        </div>
+        <div>
+          <h4>免责声明</h4>
+          <p>本站内容仅供科普学习，不构成医疗或消费建议。数据参考 GB 2760 等公开标准整理。</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 食安标签通 · 《人工智能基础与应用》课程作品</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
