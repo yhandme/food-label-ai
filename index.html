@@ -1,311 +1,571 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="食安标签通——AI 食品标签解读与添加剂科普网站，帮助你看懂食品配料表，科学认识食品添加剂。">
-  <title>食安标签通 · AI 食品标签解读与添加剂科普</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="食安标签通——AI 食品标签解读与添加剂科普网站。识别配料表中的添加剂，给出营养红绿灯、叶子评分与过敏原提示。">
+<title>食安标签通 · 食品标签解读与添加剂科普</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23E8F3EC'/%3E%3Cpath d='M7 17.4c0-5.6 3.7-9.8 9.4-9.8 0 5.6-3.7 9.8-9.4 9.8z' fill='none' stroke='%233A7D44' stroke-width='1.8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 字体异步加载：Google Fonts 访问慢时也不会卡住首屏 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap"></noscript>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<a class="skip-link" href="#main">跳到主要内容</a>
 
-  <!-- ========== 顶部导航 ========== -->
-  <header class="site-header" id="siteHeader">
-    <div class="container nav-inner">
-      <a href="#home" class="brand" data-nav>
-        <span class="brand-icon">🥗</span>
-        <span class="brand-text">食安<span class="brand-highlight">标签通</span></span>
-      </a>
-      <nav class="main-nav" id="mainNav">
-        <a href="#home" class="nav-link active" data-nav>首页</a>
-        <a href="#reader" class="nav-link" data-nav>标签解读</a>
-        <a href="#library" class="nav-link" data-nav>添加剂科普</a>
-        <a href="#assistant" class="nav-link" data-nav>AI 问答</a>
-        <a href="#tips" class="nav-link" data-nav>食品安全贴士</a>
-      </nav>
+<noscript>
+  <div class="noscript-bar">
+    <strong>需要开启 JavaScript</strong>
+    <span>解读、评分与问答都在你的浏览器里本地运行，脚本被禁用时无法生成结果。开启后刷新即可。</span>
+  </div>
+</noscript>
+
+<header class="site-header">
+  <div class="container nav-inner">
+    <a href="#home" class="brand" data-nav>
+      <span class="brand-mark" data-icon="leaf"></span>
+      <span class="brand-text">食安<em>标签通</em></span>
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#home" class="nav-link active" data-nav><span data-icon="home"></span>首页</a>
+      <a href="#reader" class="nav-link" data-nav><span data-icon="scan"></span>标签解读</a>
+      <a href="#library" class="nav-link" data-nav><span data-icon="book"></span>添加剂科普</a>
+      <a href="#assistant" class="nav-link" data-nav><span data-icon="chat"></span>问答</a>
+      <a href="#tips" class="nav-link" data-nav><span data-icon="bulb"></span>安全贴士</a>
+    </nav>
+
+    <div class="nav-right">
+      <button class="allergen-btn" id="allergenBtn" title="设置我的过敏原">
+        <span data-icon="shield"></span>
+        <span class="allergen-btn-text">我的过敏原</span>
+        <i class="allergen-dot hidden" id="allergenDot"></i>
+      </button>
       <button class="nav-toggle" id="navToggle" aria-label="切换导航菜单">
         <span></span><span></span><span></span>
       </button>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main>
+<main id="main">
 
-    <!-- ========== 首页 Hero ========== -->
-    <section class="page active" id="home">
-      <div class="hero">
-        <div class="hero-bg-blob blob-1"></div>
-        <div class="hero-bg-blob blob-2"></div>
-        <div class="container hero-inner">
-          <div class="hero-content">
-            <div class="hero-badge">✨ AI 驱动的食品安全科普助手</div>
-            <h1 class="hero-title">看懂食品标签<br><span class="gradient-text">吃得明白安心</span></h1>
-            <p class="hero-desc">配料表看不懂？添加剂名字像天书？粘贴一段配料表，食安标签通帮你快速识别添加剂、评估风险、科普知识，让每一次购物都更有底气。</p>
-            <div class="hero-actions">
-              <a href="#reader" class="btn btn-primary" data-nav>🔍 立即解读标签</a>
-              <a href="#library" class="btn btn-outline" data-nav>📚 浏览添加剂库</a>
-            </div>
-            <div class="hero-stats">
-              <div class="stat-item"><strong id="statAdditives">22</strong><span>种添加剂知识</span></div>
-              <div class="stat-item"><strong>8</strong><span>类常见功能</span></div>
-              <div class="stat-item"><strong>100%</strong><span>本地安全运行</span></div>
-            </div>
-          </div>
-          <div class="hero-visual">
-            <div class="phone-mock">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-                <div class="mock-header">🥗 食安标签通</div>
-                <div class="mock-label">
-                  <div class="mock-label-title">配料表</div>
-                  <div class="mock-tags">
-                    <span class="mock-tag safe">水</span>
-                    <span class="mock-tag safe">小麦粉</span>
-                    <span class="mock-tag warn">山梨酸钾</span>
-                    <span class="mock-tag safe">黄原胶</span>
-                    <span class="mock-tag danger">亚硝酸钠</span>
-                    <span class="mock-tag safe">维生素C</span>
-                  </div>
-                </div>
-                <div class="mock-result">
-                  <div class="mock-score"><span>风险提示</span><strong>2 项需留意</strong></div>
-                  <div class="mock-bar"><i style="width:32%"></i></div>
-                </div>
-                <div class="mock-card">
-                  <div class="mock-card-icon">🛡️</div>
-                  <div><b>山梨酸钾</b><small>防腐剂 · 较安全</small></div>
-                </div>
-              </div>
-            </div>
-            <div class="floating-chip chip-1">✅ 智能识别</div>
-            <div class="floating-chip chip-2">📖 科普解读</div>
-          </div>
+<!-- ==================== 首页 ==================== -->
+<section class="page active" id="home">
+  <div class="hero">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="tick"></span>
+          <span class="label label-green">Food label lab · note 001</span>
+        </div>
+        <h1 class="hero-title">看懂食品标签，<br><span>让判断有据可依</span></h1>
+        <p class="hero-desc">配料表里那一串陌生名词，多数是规定了使用范围和限量的食品添加剂。把配料表贴进来、填上营养成分，就能得到一份带红绿灯、叶子评分和过敏原提示的解读摘要。</p>
+        <div class="hero-actions">
+          <a href="#reader" class="btn btn-primary" data-nav><span class="icon-inline" data-icon="scan"></span>开始解读</a>
+          <a href="#library" class="btn btn-outline" data-nav><span class="icon-inline" data-icon="book"></span>浏览科普库</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><strong class="num" id="statAdditives">29</strong><span>收录添加剂</span></div>
+          <div class="stat-item"><strong class="num" id="statCategories">11</strong><span>功能分类</span></div>
+          <div class="stat-item"><strong class="num" id="statNutrients">7</strong><span>营养素指标</span></div>
         </div>
       </div>
 
-      <!-- 核心功能 -->
-      <div class="container section">
-        <div class="section-heading">
-          <span class="section-eyebrow">CORE FEATURES</span>
-          <h2>三大核心功能，<span class="gradient-text">一站式科普</span></h2>
-          <p>从识别到理解，从查询到学习，覆盖你关心的食品安全问题</p>
-        </div>
-        <div class="feature-grid">
-          <a href="#reader" class="feature-card card-reader" data-nav>
-            <div class="feature-icon">🔍</div>
-            <h3>标签智能解读</h3>
-            <p>粘贴配料表文本，自动识别其中的食品添加剂，标注功能类别与安全提示，一键生成通俗解读报告。</p>
-            <span class="feature-link">开始解读 →</span>
-          </a>
-          <a href="#library" class="feature-card card-library" data-nav>
-            <div class="feature-icon">📚</div>
-            <h3>添加剂科普库</h3>
-            <p>按功能分类浏览 20+ 常见添加剂，了解每种的用途、常见食品、安全限量和科学解读。</p>
-            <span class="feature-link">进入科普库 →</span>
-          </a>
-          <a href="#assistant" class="feature-card card-assistant" data-nav>
-            <div class="feature-icon">💬</div>
-            <h3>AI 科普问答</h3>
-            <p>关于配料表、防腐剂、甜味剂的疑问，随时提问。基于科学知识库，给出清晰可靠的回答。</p>
-            <span class="feature-link">去提问 →</span>
-          </a>
-        </div>
+      <div class="hero-visual">
+        <div class="specimen" id="specimenBody"></div>
+        <div class="deco hero-deco" data-fruit-row="apple,pear,cherry" data-size="38" data-opacity="0.5" aria-hidden="true"></div>
+
+        <div class="mascot-wrap" id="heroMascot" aria-hidden="true"></div>
       </div>
-
-      <!-- 使用流程 -->
-      <div class="container section">
-        <div class="section-heading">
-          <span class="section-eyebrow">HOW IT WORKS</span>
-          <h2>三步，<span class="gradient-text">读懂一张标签</span></h2>
-        </div>
-        <div class="steps-grid">
-          <div class="step-card"><div class="step-num">01</div><h3>输入配料表</h3><p>粘贴食品包装上的配料表文字，或直接选用示例数据体验。</p></div>
-          <div class="step-arrow">→</div>
-          <div class="step-card"><div class="step-num">02</div><h3>智能识别分析</h3><p>系统比对知识库，高亮添加剂并给出功能、风险等级与说明。</p></div>
-          <div class="step-arrow">→</div>
-          <div class="step-card"><div class="step-num">03</div><h3>查看科普建议</h3><p>获得通俗的解读报告和健康建议，把知识用到实际购物中。</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== 标签解读 ========== -->
-    <section class="page" id="reader">
-      <div class="container section">
-        <div class="section-heading left">
-          <span class="section-eyebrow">LABEL READER</span>
-          <h2>标签智能解读</h2>
-          <p>粘贴配料表，让 AI 帮你识别其中的添加剂与潜在风险</p>
-        </div>
-
-        <div class="reader-layout">
-          <div class="reader-input-panel">
-            <div class="panel-card">
-              <div class="panel-header">
-                <h3>📝 输入配料表</h3>
-                <span class="panel-hint">支持直接粘贴文字</span>
-              </div>
-              <textarea id="labelInput" placeholder="请粘贴食品包装上的配料表，例如：配料：水、白砂糖、山梨酸钾、柠檬黄……" spellcheck="false"></textarea>
-              <div class="sample-block">
-                <div class="sample-title">🧪 试试示例数据</div>
-                <div class="sample-list" id="sampleList"></div>
-              </div>
-              <div class="input-actions">
-                <button class="btn btn-primary btn-block" id="analyzeBtn">🔍 开始智能解读</button>
-                <button class="btn btn-ghost btn-block" id="clearBtn">清空内容</button>
-              </div>
-              <div class="privacy-note">🔒 所有分析在浏览器本地完成，你的输入不会被上传或保存。</div>
-            </div>
-          </div>
-
-          <div class="reader-result-panel" id="resultPanel">
-            <div class="empty-state" id="emptyState">
-              <div class="empty-icon">🔬</div>
-              <h3>等待解读</h3>
-              <p>在左侧输入配料表或选择示例数据，然后点击「开始智能解读」</p>
-            </div>
-            <div class="result-content hidden" id="resultContent">
-              <!-- 解读结果动态生成 -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== 添加剂科普库 ========== -->
-    <section class="page" id="library">
-      <div class="container section">
-        <div class="section-heading left">
-          <span class="section-eyebrow">ADDITIVE LIBRARY</span>
-          <h2>食品添加剂科普库</h2>
-          <p>按功能分类查询，科学认识每一种添加剂</p>
-        </div>
-
-        <div class="library-toolbar">
-          <div class="search-box">
-            <span class="search-icon">🔎</span>
-            <input type="text" id="searchInput" placeholder="搜索添加剂名称、英文名或 INS 编号…">
-          </div>
-          <div class="filter-chips" id="filterChips"></div>
-        </div>
-
-        <div class="library-count" id="libraryCount"></div>
-        <div class="additive-grid" id="additiveGrid"></div>
-        <div class="no-result hidden" id="noResult">
-          <div class="empty-icon">🔍</div>
-          <h3>没有找到相关添加剂</h3>
-          <p>试试更换关键词或选择其他分类</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== AI 问答 ========== -->
-    <section class="page" id="assistant">
-      <div class="container section">
-        <div class="section-heading left">
-          <span class="section-eyebrow">AI ASSISTANT</span>
-          <h2>AI 食品安全问答</h2>
-          <p>关于食品标签和添加剂的疑问，随时提问</p>
-        </div>
-
-        <div class="chat-layout">
-          <div class="chat-card">
-            <div class="chat-header">
-              <div class="chat-avatar">🤖</div>
-              <div>
-                <h3>食安小助手</h3>
-                <span class="chat-status"><i></i> 在线 · 基于科普知识库</span>
-              </div>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-              <div class="chat-message bot">
-                <div class="message-avatar">🤖</div>
-                <div class="message-bubble">你好！我是食安小助手 👋 关于食品标签、添加剂、食品安全，你想了解什么？可以从下面的常见问题开始，也可以直接输入你的问题。</div>
-              </div>
-            </div>
-            <div class="quick-questions" id="quickQuestions"></div>
-            <div class="chat-input-area">
-              <input type="text" id="chatInput" placeholder="输入你的问题，例如：添加剂都有害吗？">
-              <button class="btn btn-primary" id="sendBtn">发送 ➤</button>
-            </div>
-          </div>
-          <div class="chat-side">
-            <div class="side-card">
-              <h3>💡 提问小贴士</h3>
-              <ul>
-                <li>可以直接问「苯甲酸钠是什么」</li>
-                <li>试试问「无糖饮料安全吗」</li>
-                <li>询问「亚硝酸盐为什么用在肉里」</li>
-                <li>支持关键词匹配，用自然语言提问即可</li>
-              </ul>
-            </div>
-            <div class="side-card disclaimer">
-              <h3>⚠️ 免责声明</h3>
-              <p>本助手回答基于公开科普知识整理，仅供学习参考，不构成医疗建议或消费指导。如有健康疑虑，请咨询专业医生或营养师。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== 食品安全贴士 ========== -->
-    <section class="page" id="tips">
-      <div class="container section">
-        <div class="section-heading">
-          <span class="section-eyebrow">SAFETY TIPS</span>
-          <h2>食品安全<span class="gradient-text">小贴士</span></h2>
-          <p>把这些习惯带进超市，购物更有底气</p>
-        </div>
-        <div class="tips-grid" id="tipsGrid"></div>
-
-        <div class="cta-banner">
-          <div>
-            <h2>准备好读懂下一张食品标签了吗？</h2>
-            <p>现在就试试标签解读功能，把科普知识用起来</p>
-          </div>
-          <a href="#reader" class="btn btn-light" data-nav>🔍 开始解读</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ========== 添加剂详情弹窗 ========== -->
-  <div class="modal-overlay hidden" id="modalOverlay">
-    <div class="modal" role="dialog" aria-modal="true">
-      <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
-      <div id="modalBody"></div>
     </div>
   </div>
 
-  <!-- ========== 页脚 ========== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <div class="brand"><span class="brand-icon">🥗</span><span class="brand-text">食安<span class="brand-highlight">标签通</span></span></div>
-        <p>AI 食品标签解读与添加剂科普网站<br>让食品科学变得简单易懂</p>
-      </div>
-      <div class="footer-links">
+  <!-- 每日一贴 -->
+  <div class="container">
+    <div class="daily-band">
+      <div class="daily-band-left">
+        <span class="daily-band-icon" data-icon="bulb"></span>
         <div>
-          <h4>快速导航</h4>
-          <a href="#reader" data-nav>标签解读</a>
-          <a href="#library" data-nav>添加剂科普</a>
-          <a href="#assistant" data-nav>AI 问答</a>
-        </div>
-        <div>
-          <h4>免责声明</h4>
-          <p>本站内容仅供科普学习，不构成医疗或消费建议。数据参考 GB 2760 等公开标准整理。</p>
+          <span class="label">Daily note · 每日一贴</span>
+          <strong data-tip-title>配料表前三位，决定了一包食品的“本质”</strong>
+          <p data-tip-text>配料按含量从高到低排列。如果白砂糖、果葡糖浆排在前两位，那它本质上就是一份糖。</p>
         </div>
       </div>
+      <div class="daily-band-right">
+        <span class="tip-tag" data-tip-tag>读标签</span>
+        <button class="mini-btn" data-tip-next>换一条<span data-icon="rotate"></span></button>
+      </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 食安标签通 · 《人工智能基础与应用》课程作品</p>
-    </div>
-  </footer>
+  </div>
 
-  <script src="js/data.js"></script>
-  <script src="js/app.js"></script>
+  <div class="container">
+    <!-- 样例速览 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-head-left">
+          <span class="label">Try it now</span>
+          <h2>手边没有包装？先用样例试试</h2>
+          <p>点任意一张卡，配料表、食品类别与营养成分会一起代入工作台</p>
+        </div>
+        <span class="head-aside mono">3 samples</span>
+      </div>
+
+      <div class="quick-grid" id="quickSamples"></div>
+    </div>
+
+    <!-- 功能 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-head-left">
+          <span class="label">Core modules</span>
+          <h2>四个模块，覆盖从识别到判断</h2>
+          <p>识别添加剂只是第一步，能说清它是什么、营养如何、自己该不该吃才算读完一张标签</p>
+        </div>
+        <span class="head-aside mono">01 / 04</span>
+      </div>
+
+      <div class="feature-grid">
+        <a href="#reader" class="feature-card" data-nav>
+          <span class="feature-icon" data-icon="scan"></span>
+          <h3>标签智能解读</h3>
+          <p>粘贴配料表，自动标注每种添加剂的类别、用途与限量，并给出 A/B/C 级评估与逐项科普。</p>
+          <span class="feature-link">开始解读<span data-icon="arrow"></span></span>
+        </a>
+        <a href="#reader" class="feature-card" data-nav>
+          <span class="feature-icon warm" data-icon="gauge"></span>
+          <h3>营养红绿灯</h3>
+          <p>填能量、脂肪、糖、钠，得到四色指示器与 NRV% 每日参考值，另附 0.5–5 片的叶子评分。</p>
+          <span class="feature-link">填写营养<span data-icon="arrow"></span></span>
+        </a>
+        <a href="#library" class="feature-card" data-nav>
+          <span class="feature-icon" data-icon="beaker"></span>
+          <h3>添加剂科普库</h3>
+          <p>收录 <span id="featureAddCount">85</span> 种常见添加剂，覆盖 <span id="featureCatCount">15</span> 类功能，每种都附有国际编码、常见食品、ADI 限量与科学解读。</p>
+          <span class="feature-link">进入科普库<span data-icon="arrow"></span></span>
+        </a>
+        <a href="#assistant" class="feature-card" data-nav>
+          <span class="feature-icon warm" data-icon="chat"></span>
+          <h3>问答与过敏提醒</h3>
+          <p>配料表怎么看、代糖安不安全，都可以直接提问；设置过敏原后，命中的成分会自动标红。</p>
+          <span class="feature-link">去提问<span data-icon="arrow"></span></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 三步 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-head-left">
+          <span class="label">Procedure</span>
+          <h2>三步读完一张标签</h2>
+        </div>
+        <span class="head-aside mono">Workflow</span>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <span class="deco step-deco" data-fruit="apple" data-size="36" data-opacity="0.26" data-rotate="-6" aria-hidden="true"></span>
+          <div class="step-no">STEP 01</div>
+          <h3>录入基本信息</h3>
+          <p>选择食品类别，粘贴配料表，按包装上的营养成分表填几个数字。</p>
+        </div>
+        <div class="step">
+          <span class="deco step-deco" data-fruit="cherry" data-size="36" data-opacity="0.26" data-rotate="4" aria-hidden="true"></span>
+          <div class="step-no">STEP 02</div>
+          <h3>逐项识别比对</h3>
+          <p>系统比对知识库，高亮添加剂、算出 NRV% 与红绿灯，并检查常见致敏物质。</p>
+        </div>
+        <div class="step">
+          <span class="deco step-deco" data-fruit="strawberry" data-size="36" data-opacity="0.26" data-rotate="-3" aria-hidden="true"></span>
+          <div class="step-no">STEP 03</div>
+          <h3>带走一张摘要</h3>
+          <p>得到贴纸摘要卡与综合建议，可复制文字或截图保存，下次采购直接对照。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-head-left">
+          <span class="label">Questions</span>
+          <h2>几个常被问到的问题</h2>
+        </div>
+        <span class="head-aside mono">FAQ</span>
+      </div>
+
+      <div class="faq">
+        <div class="faq-item open">
+          <button class="faq-q">这个网站的解读结果准确吗？<span data-icon="chevronDown"></span></button>
+          <div class="faq-a"><p>结果由本地规则化知识库生成：配料匹配依据 GB 2760 整理的功能分类与限量说明，营养分级参考 GB 28050 的 NRV 与公开阈值。它是一份“辅助判断”的科普工具，不是检测报告，也不能替代医生的建议。所有计算在你的浏览器里完成，输入不会被上传。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">红绿灯的阈值是怎么定的？<span data-icon="chevronDown"></span></button>
+          <div class="faq-a"><p>脂肪（3 / 17.5 g）、糖（5 / 22.5 g）、钠（120 / 600 mg）三档参考英国 FSA 前端包装标识的每 100 g 阈值；<b>饮料另有一套更严格的标准</b>（糖 2.5 / 11.5 g、脂肪 1.5 / 8.75 g、钠 120 / 300 mg 每 100 mL），否则一瓶可乐的糖会显得“不算高”。能量一项没有国际统一标准，本站取 400 / 1200 kJ 作为参考区间，并在结果里注明。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">叶子评分和 A/B/C 等级是一回事吗？<span data-icon="chevronDown"></span></button>
+          <div class="faq-a"><p>不是。A/B/C 只看添加剂维度（是否含严格限量或需留意的成分），叶子评分只看营养维度（能量、脂肪、糖、钠四项红绿灯，加上蛋白质与膳食纤维的加分）。一包高糖但添加剂干净的饮料，可能等级是 A、叶子却只有 3 片——两个维度分开看，结论才诚实。糖还额外按“糖密度”扣分，避免一瓶糖水因为“低脂”拿到高分。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">我的过敏原设置会被上传吗？<span data-icon="chevronDown"></span></button>
+          <div class="faq-a"><p>不会。过敏原设置与历史记录都保存在你本机浏览器的 localStorage 里，清除浏览器数据就会消失。换设备需要重新设置。识别仅覆盖八类致敏物质加亚硫酸盐的关键词，最终请以包装上的致敏物质提示为准。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 关于本站 -->
+    <div class="section about" id="about">
+      <div class="section-head">
+        <div class="section-head-left">
+          <span class="label">About</span>
+          <h2>关于本站</h2>
+          <p>设计取向、技术实现与数据来源</p>
+        </div>
+        <span class="head-aside mono">v1.0</span>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <h3><span data-icon="palette"></span>设计取向</h3>
+          <p>整套界面按「食品科学实验室」的语言来做：暖白纸底、去饱和的绿与赭、极细边框、克制的阴影。数据区域用等宽数字和小号大写标签，像一份实验记录；说明文字保留书卷气的衬线体。目标是让结论看起来可信，而不是热闹。</p>
+        </div>
+        <div class="about-card">
+          <h3><span data-icon="crystal"></span>技术实现</h3>
+          <p>纯静态单页：HTML + CSS + 原生 JavaScript，没有框架、没有构建步骤、没有后端服务。配料解析、添加剂匹配、红绿灯判定、叶子评分与问答检索全部在浏览器里完成，输入不会离开本机。图标是一套自绘的线性 SVG，字体异步加载，首屏不依赖任何 CDN。</p>
+        </div>
+        <div class="about-card">
+          <h3><span data-icon="book"></span>数据依据</h3>
+          <p>添加剂的功能分类与限量说明依据 <b>GB 2760-2024</b> 整理（该版于 2025 年 2 月 8 日实施，替代 2014 版，脱氢乙酸钠等品种的使用范围已作调整），NRV 参考 GB 28050-2011，致敏物质按 GB 7718 的八类加亚硫酸盐；营养红绿灯阈值参考英国 FSA 前端包装标识，饮料另有一套更严格的标准。所有条目都是人工整理，遇到具体产品请以官方标准原文与包装标示为准。</p>
+        </div>
+      </div>
+
+      <div class="about-fruit" aria-hidden="true">
+        <span class="rule-line"></span>
+        <span class="fruit-item" data-fruit="apple" data-size="24" data-opacity="0.5"></span>
+        <span class="rule-line"></span>
+      </div>
+
+      <p class="about-sign">
+        2026 ·
+        收录 <b id="aboutAddCount">85</b> 种添加剂、<b id="aboutQaCount">27</b> 条问答
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 解读工作台 ==================== -->
+<section class="page" id="reader">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="label">Label workbench</span>
+        <h2>标签解读工作台</h2>
+        <p>选类别、贴配料、填营养，生成一张可以带走的解读摘要</p>
+      </div>
+      <span class="head-aside mono">Local analysis</span>
+    </div>
+
+    <div class="bench">
+      <div class="bench-input">
+
+        <div class="bench-block">
+          <div class="bench-block-head">
+            <span class="step-badge">01</span>
+            <h3>这是什么食品</h3>
+            <span class="bench-hint" id="categoryNote">选择类别后，会给出这一类食品的重点关注项</span>
+          </div>
+          <div class="cat-chips" id="foodCategories"></div>
+        </div>
+
+        <div class="bench-block">
+          <div class="bench-block-head">
+            <span class="step-badge">02</span>
+            <h3>配料表</h3>
+            <span class="bench-hint">粘贴包装上的文字，标点不用管</span>
+          </div>
+          <div class="label-tools">
+            <button class="mini-btn" id="pasteBtn"><span data-icon="copy"></span>粘贴</button>
+            <button class="mini-btn" id="tidyBtn"><span data-icon="list"></span>整理格式</button>
+            <button class="mini-btn" id="demoFillBtn"><span data-icon="sparkles"></span>试试火腿肠</button>
+          </div>
+          <textarea id="labelInput" placeholder="例如：配料：猪肉、鸡肉、水、食用盐、白砂糖、亚硝酸钠、山梨酸钾、卡拉胶……" spellcheck="false"></textarea>
+
+          <div class="preview-box">
+            <div class="preview-head">
+              <span class="label">配料表小助手</span>
+              <span class="preview-count" id="previewCount"></span>
+            </div>
+            <div class="preview-tags" id="ingredientPreview">
+              <span class="preview-hint">识别结果会显示在这里</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bench-block">
+          <div class="bench-block-head">
+            <span class="step-badge">03</span>
+            <h3>营养成分</h3>
+            <span class="bench-hint" id="nutritionBasis">每 100 g</span>
+          </div>
+          <div class="nut-grid" id="nutritionGrid"></div>
+          <div class="nut-foot">
+            <span id="nutritionSummary">尚未填写</span>
+            <span class="muted">没填全也可以，红绿灯只用已填项</span>
+          </div>
+        </div>
+
+        <div class="bench-block">
+          <div class="bench-block-head">
+            <span class="step-badge">04</span>
+            <h3>添加剂</h3>
+            <button class="mini-btn accent" id="addAdditiveBtn"><span data-icon="plus"></span>添加</button>
+          </div>
+          <div class="add-chips" id="additiveChips">
+            <p class="chips-empty">粘贴配料表后自动识别，也可以从知识库里手动挑选</p>
+          </div>
+        </div>
+
+        <div class="bench-actions">
+          <button class="btn btn-primary btn-block" id="analyzeBtn">
+            <span class="icon-inline" data-icon="sparkles"></span>生成解读摘要
+          </button>
+          <button class="btn btn-ghost" id="clearBtn">清空</button>
+        </div>
+
+        <div class="privacy-note">
+          <span data-icon="lock"></span>分析在浏览器本地完成，输入不会上传
+        </div>
+      </div>
+
+      <aside class="bench-side">
+        <div class="side-panel">
+          <div class="side-panel-head">
+            <span class="label">Quick fill</span>
+            <h3>样例一键填充</h3>
+          </div>
+          <div class="sample-list" id="sampleList"></div>
+          <p class="side-note">填充后配料表、类别与营养成分会一起带入</p>
+        </div>
+
+        <div class="side-panel cream">
+          <div class="side-panel-head">
+            <span class="label">Daily note</span>
+            <h3>每日一贴</h3>
+          </div>
+          <div class="daily-tip">
+            <span class="tip-tag" data-tip-tag>读标签</span>
+            <strong data-tip-title>配料表前三位，决定了一包食品的“本质”</strong>
+            <p data-tip-text>配料按含量从高到低排列。如果白砂糖、果葡糖浆排在前两位，那它本质上就是一份糖。</p>
+          </div>
+          <button class="mini-btn" data-tip-next>换一条<span data-icon="rotate"></span></button>
+        </div>
+
+        <div class="side-panel">
+          <div class="side-panel-head">
+            <span class="label">My allergens</span>
+            <h3>我的过敏原</h3>
+          </div>
+          <div class="tag-row" data-allergen-list></div>
+          <p class="side-note">勾选后，解读结果里命中的成分会自动标红，并在摘要卡上提示。</p>
+          <button class="mini-btn" id="allergenBtn3">去设置<span data-icon="arrow"></span></button>
+        </div>
+      </aside>
+    </div>
+
+    <div class="result-area" id="resultPanel">
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon" data-icon="flask"></div>
+        <h3>等待解读</h3>
+        <p>录入信息后点「生成解读摘要」，或在右侧挑一个样例直接体验</p>
+        <div class="deco-row empty-fruit" data-fruit-row="apple,pear,orange" data-size="30" data-opacity="0.5" aria-hidden="true"></div>
+      </div>
+      <div id="resultContent" class="hidden"></div>
+    </div>
+
+    <div class="history-panel">
+      <div class="history-head">
+        <h3><span data-icon="history"></span>历史记录<em id="historyCount">暂无</em></h3>
+        <button class="link-btn" id="clearHistoryBtn">清空历史</button>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 科普库 ==================== -->
+<section class="page" id="library">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="label">Additive library</span>
+        <h2>食品添加剂科普库</h2>
+        <p>按功能分类查询，了解每一种的用途、限量、致敏提示与注意事项</p>
+      </div>
+      <span class="head-aside mono" id="libraryAside">85 entries</span>
+    </div>
+
+    <div class="library-toolbar">
+      <div class="search-box">
+        <span data-icon="search"></span>
+        <input type="text" id="searchInput" placeholder="搜名称、INS 编码或功能类别，如「防腐剂」「E330」" aria-label="搜索添加剂">
+      </div>
+      <div class="filter-chips" id="filterChips"></div>
+    </div>
+
+    <div class="library-count" id="libraryCount"></div>
+    <div class="additive-grid" id="additiveGrid"></div>
+    <div class="no-result hidden" id="noResult">
+      <div class="empty-icon" data-icon="search"></div>
+      <h3>没有找到相关添加剂</h3>
+      <p>试试更换关键词或选择其他分类</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 问答 ==================== -->
+<section class="page" id="assistant">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="label">Assistant</span>
+        <h2>食品安全问答</h2>
+        <p>关于配料表、添加剂与营养标签的疑问，可以直接提问</p>
+      </div>
+      <span class="head-aside mono">Knowledge-based</span>
+    </div>
+
+    <div class="chat-layout">
+      <div class="chat-card">
+        <div class="chat-head">
+          <div class="chat-avatar" data-icon="flask"></div>
+          <div>
+            <h3>食安小助手</h3>
+            <span class="chat-status"><i></i>在线 · 基于科普知识库</span>
+          </div>
+        </div>
+        <div class="chat-messages" id="chatMessages" role="log" aria-live="polite" aria-label="问答记录">
+          <div class="deco chat-deco" data-fruit="strawberry" data-size="112" data-opacity="0.06" aria-hidden="true"></div>
+          <div class="chat-msg bot">
+            <div class="msg-avatar" data-icon="flask"></div>
+            <div class="msg-bubble">你好，我是食安小助手。关于食品标签、添加剂、营养成分与过敏原的问题，都可以问我。也可以从下方的常见问题开始。</div>
+          </div>
+        </div>
+        <div class="quick-qs" id="quickQuestions"></div>
+        <div class="chat-input">
+          <input type="text" id="chatInput" placeholder="输入你的问题，例如：NRV% 是什么意思">
+          <button class="btn btn-primary" id="sendBtn"><span class="icon-inline" data-icon="send"></span>发送</button>
+        </div>
+      </div>
+
+      <div class="chat-side">
+        <div class="side-card">
+          <h3><span data-icon="shield"></span>我的过敏原</h3>
+          <div class="tag-row" data-allergen-list></div>
+          <button class="mini-btn" id="allergenBtn2">去设置<span data-icon="arrow"></span></button>
+        </div>
+        <div class="side-card">
+          <h3><span data-icon="bulb"></span>可以这样提问</h3>
+          <ul>
+            <li>苯甲酸钠是什么，安全吗</li>
+            <li>无糖饮料里的甜味剂能不能喝</li>
+            <li>NRV% 到底怎么读</li>
+            <li>配料表里的过敏原怎么识别</li>
+          </ul>
+        </div>
+        <div class="side-card notice">
+          <h3><span data-icon="info"></span>免责声明</h3>
+          <p>回答基于公开科普资料整理，仅供学习参考，不构成医疗建议或消费指导。如有健康疑虑，请咨询专业医生或营养师。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 贴士 ==================== -->
+<section class="page" id="tips">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head-left">
+        <span class="label">Checklist</span>
+        <h2>逛超市时的六个习惯</h2>
+        <p>不需要记住化学式，记住这几个看标签的顺序就够了</p>
+      </div>
+      <span class="head-aside mono">06 tips</span>
+    </div>
+
+    <div class="tips-grid" id="tipsGrid"></div>
+
+    <div class="section tip-section">
+      <div class="section-head">
+        <div class="section-head-left">
+          <span class="label">All notes</span>
+          <h2>每日一贴合集</h2>
+          <p>三十条读标签的小知识，按需翻看</p>
+        </div>
+        <span class="head-aside mono" id="tipNoteCount">30 notes</span>
+      </div>
+      <div class="tip-list" id="tipList"></div>
+    </div>
+
+    <div class="cta">
+      <div class="deco cta-deco" data-fruit-row="apple,watermelon,cherry" data-size="58" data-opacity="0.16" aria-hidden="true"></div>
+      <div>
+        <h2>准备好读下一张标签了吗</h2>
+        <p>把上面这些判断顺序，放进实际的解读流程里</p>
+      </div>
+      <a href="#reader" class="btn btn-light" data-nav><span class="icon-inline" data-icon="scan"></span>开始解读</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="modal-overlay hidden" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="详情">
+    <button class="modal-close" id="modalClose" aria-label="关闭" data-icon="close"></button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <div class="brand">
+        <span class="brand-mark" data-icon="leaf"></span>
+        <span class="brand-text">食安<em>标签通</em></span>
+      </div>
+      <p>AI 食品标签解读与添加剂科普网站<br>数据参考 GB 2760-2024、GB 28050-2011 等公开标准整理</p>
+      <div class="footer-doodle" id="footerDoodle" aria-hidden="true"></div>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <h4>Navigate</h4>
+        <a href="#reader" data-nav>标签解读</a>
+        <a href="#library" data-nav>添加剂科普</a>
+        <a href="#assistant" data-nav>食品安全问答</a>
+        <a href="#tips" data-nav>安全贴士</a>
+        <a href="#about" data-goto-about>关于本站</a>
+      </div>
+      <div>
+        <h4>Disclaimer</h4>
+        <p>本站内容仅供科普学习，不构成医疗或消费建议。评估结果由规则化知识库生成，不等同于权威检测结论。过敏原识别不能替代专业诊断。</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">© 2026 食安标签通</div>
+  </div>
+</footer>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
